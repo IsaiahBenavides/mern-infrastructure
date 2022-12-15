@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// Add the bcrypt library
+const bcrypt = require('bcrypt')
+
+const SALT_ROUNDS = 6
 
 const userSchema = new Schema({
     name: {
@@ -19,6 +23,24 @@ const userSchema = new Schema({
         minLength: 3,
         required: true
     }
-});
+},
+    {
+        timestamps: true,
+        // Even though it's hashed - don't serialize the password
+        toJSON: {
+            transform: function (doc, ret) {
+                delete ret.password;
+                return ret;
+            }
+        }
+    });
+
+userSchema.pre('save', async function (next) {
+    // 'this' is the user doc
+    if (!this.isModified('password')) return next();
+
+    this.password = await bcrypt.hash(this.password, SALT_ROUNDS)
+    return next()
+})
 
 module.exports = mongoose.model('User', userSchema);
