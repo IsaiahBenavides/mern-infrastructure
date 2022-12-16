@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom"
-import * as userService from '../utilities/users-service'
+import { Link } from "react-router-dom";
+import * as userService from "../utilities/users-service";
 
-export default function UserNav({name, setUser}) {
-    function handleLogOut(){
-        userService.logOut()
-        setUser(null)
-    }
-    return (
-        <>
-            <a>Welcome: {name}</a> &nbsp; | &nbsp;
-            <Link to="" onClick={handleLogOut}>Log Out</Link>
-        </>
-    )
+export default function UserNav({ name, setUser }) {
+  function handleLogOut() {
+    userService.logOut();
+    setUser(null);
+  }
+  return (
+    <>
+      <p>Welcome: {name}</p>
+      <Link to="" onClick={handleLogOut}>Log Out</Link>
+    </>
+  );
 }
