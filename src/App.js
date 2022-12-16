@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import NewOrderPage from "./pages/NewOrderPage";
-import OrderHistoryPage from "./pages/OrderHistoryPage";
-import AuthPage from "./pages/AuthPage";
+import NewOrderPage from "./pages/NewOrderPage/NewOrderPage";
+import OrderHistoryPage from "./pages/OrderHistoryPage/OrderHistoryPage";
+import AuthPage from "./pages/AuthPage/AuthPage";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { getUser } from "./utilities/users-service";
