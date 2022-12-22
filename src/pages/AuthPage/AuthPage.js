@@ -1,12 +1,19 @@
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
-import LoginForm from "../../components/LoginForm/LogInForm";
+import { useState } from 'react';
+import styles from './AuthPage.module.css';
+import LogInForm from '../../components/LogInForm/LogInForm';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import Logo from '../../components/Logo/Logo';
 
-export default function AuthPage(setUser) {
+export default function AuthPage({ setUser }) {
+  const [showLogin, setShowLogin] = useState(true);
+
   return (
-    <main>
-      <h1>Authorization Page</h1>
-      <SignUpForm setUser={setUser} />
-      <LoginForm setUser={setUser} />
+    <main className={styles.AuthPage}>
+      <div>
+        <Logo />
+        <h3 onClick={() => setShowLogin(!showLogin)}>{showLogin ? 'SIGN UP' : 'LOG IN'}</h3>
+      </div>
+      {showLogin ? <LogInForm setUser={setUser} /> : <SignUpForm setUser={setUser} />}
     </main>
   );
 }

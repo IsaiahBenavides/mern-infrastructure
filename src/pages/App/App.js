@@ -1,18 +1,18 @@
-import "./App.css";
+import styles from "./App.module.css";
 import { useState } from "react";
-import NewOrderPage from "./pages/NewOrderPage/NewOrderPage";
-import OrderHistoryPage from "./pages/OrderHistoryPage/OrderHistoryPage";
-import AuthPage from "./pages/AuthPage/AuthPage";
-import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import { getUser } from "./utilities/users-service";
-import UserNav from "./components/UserNav";
+import { getUser } from "../../utilities/users-service";
+import { Route, Routes, Navigate } from "react-router-dom";
+import AuthPage from "../AuthPage/AuthPage";
+import NewOrderPage from "../NewOrderPage/NewOrderPage";
+import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+import NavBar from "../../components/NavBar";
+import UserLogOut from "../../components/UserLogOut/UserLogOut";
 
 function App() {
   const [user, setUser] = useState(getUser());
 
   return (
-    <main className="App">
+    <main className={styles.App}>
       {user ? (
         <>
           <nav id="NavBar">
@@ -20,11 +20,12 @@ function App() {
             &nbsp; | &nbsp;
             <NavBar path="/orders/new" linkText="New Order" />
             &nbsp; | &nbsp;
-            <UserNav name={getUser().name} />
+            <UserLogOut name={getUser().name} />
           </nav>
           <Routes>
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/new" element={<NewOrderPage />} />
+            <Route path="/*" element={<Navigate to="/orders/new" />} />
           </Routes>
         </>
       ) : (
