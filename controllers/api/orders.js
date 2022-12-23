@@ -8,7 +8,7 @@ module.exports = {
   checkout,
   history
 };
-
+ 
 // A cart is the unpaid order for a user
 async function cart(req, res) {
   try{
